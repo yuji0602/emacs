@@ -4,6 +4,9 @@
 ;;; M-x mgt for magit-status
 (defalias 'mgt 'magit-status)
 
+;;; M-x gtl for goto-line
+(defalias 'gtl 'goto-line)
+
 ;;; *.~ とかのバックアップファイルを作らない
 (setq make-backup-files nil)
 
