@@ -16,6 +16,9 @@
 ;;; auto-complete-modeを有効にする
 (global-auto-complete-mode t)
 
+;;; 方向キーを無効にする
+(mapc 'global-unset-key '([left] [right] [up] [down]))
+
 ;;; php-mode
 (add-hook 'php-mode-hook
          (lambda ()
