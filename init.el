@@ -32,7 +32,6 @@
 ;;; ctrl-hをbackspaceキーに変更
 (keyboard-translate ?\C-h ?\C-?)
 
-
 ;
 ; あらゆるmajor modeを使えるようにする
 ;
@@ -50,10 +49,7 @@
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
-       "https://raw.g
-
-
-ithubusercontent.com/dimitri/el-get/master/el-get-install.el")
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
@@ -88,14 +84,21 @@ ithubusercontent.com/dimitri/el-get/master/el-get-install.el")
 
 ; helm
 (el-get-bundle helm)
+
 ; helm-ag
 (el-get-bundle syohex/emacs-helm-ag)
+(setq helm-ag-base-command "ag --nocolor --nogrou")
+(global-set-key (kbd "C-c s") 'helm-ag)
+
+; helm-c-yasnippet
+(el-get-bundle helm-c-yasnippet)
+(setq helm-yas-space-match-any-greedy t)
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
+(yas-global-mode 1)
+(yas-load-directory "~/.emacs.d/snippets")
 
 ; php-mode
 (el-get-bundle php-mode)
-
-; evil(mercurialのhgコマンドが必要)
-;(el-get-bundle evil)
 
 ; magit
 (el-get-bundle magit)
@@ -142,3 +145,33 @@ ithubusercontent.com/dimitri/el-get/master/el-get-install.el")
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . php-mode))
 (setq php-search-url "http://jp.php.net/ja/")
 (setq php-manual-url "http://jp.php.net/manual/ja/")
+
+
+;;;
+;;; GNU emacs用
+;;;
+(if window-system (progn
+
+;;; font setting
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(default ((t (:stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown" :family "Ricty" :height 140))))
+ '(cursor ((t (:background "#F8F8F2" :foreground "#272822"))))
+ '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "#75715E"))))
+ '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#A6E22E"))))
+ '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "#F92672"))))
+ '(font-lock-preprocessor-face ((t (:inherit font-lock-builtin-face :foreground "#66d9ef"))))
+ '(font-lock-string-face ((((class color) (min-colors 88) (background dark)) (:foreground "#E6DB74"))))
+ '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "#66d9ef"))))
+ '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#FD971F"))))
+ '(region ((((class color) (min-colors 88) (background dark)) (:background "#49483E"))))
+ '(show-paren-match ((((class color) (background dark)) (:background "#3E3D32"))))
+ '(variable-pitch ((t (:family "DejaVu Sans")))))
+
+(set-fontset-font
+ nil 'japanese-jisx0208
+ (font-spec :family "Ricty"))
+))
