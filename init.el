@@ -17,6 +17,9 @@
 (setq frame-title-format "%f") ;;タイトルバーにフルパス表示
 (auto-compression-mode t) ;;日本語info文字化け防止
 (global-hl-line-mode) ;;行ハイライト
+(custom-set-faces
+ '(hl-line ((t (:background "color-236"))))
+ )
 (show-paren-mode 1) ;;対応括弧ハイライト
 (setq-default line-spacing 0) ;;行間設定
 (setq-default tab-width 2 indent-tabs-mode nil) ;;; インデント時にタブを使わないでスペースを使う
